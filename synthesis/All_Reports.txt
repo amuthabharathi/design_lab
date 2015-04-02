@@ -1,0 +1,172 @@
+
+****************************************
+Report : power
+        -analysis_effort low
+Design : soc_top
+Version: I-2013.12-SP1
+Date   : Mon Mar 30 22:53:00 2015
+****************************************
+
+
+Library(s) Used:
+
+    gtech (File: /usr/local/apps/synopsys/syn/libraries/syn/gtech.db)
+
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+soc_top                5K_hvratio_1_1    NangateOpenCellLibrary
+
+
+Global Operating Voltage = 0.95 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+  Cell Internal Power  =   0.0000 mW    (0%)
+  Net Switching Power  =  15.9018 uW  (100%)
+                         ---------
+Total Dynamic Power    =  15.9018 uW  (100%)
+
+Cell Leakage Power     =   0.0000 pW
+
+Information: report_power power group summary does not include estimated clock tree power. (PWR-789)
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
+sequential         0.0000        2.5567e-03            0.0000        2.5567e-03  (  16.07%)
+combinational      0.0000        1.3349e-02            0.0000        1.3349e-02  (  83.93%)
+--------------------------------------------------------------------------------------------------
+Total              0.0000 mW     1.5905e-02 mW         0.0000 pW     1.5905e-02 mW
+
+
+
+
+******************************************************************************************************************
+
+
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : tmr_8bit
+Version: I-2013.12-SP1
+Date   : Sun Mar 29 23:33:41 2015
+****************************************
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: tmr_reg_reg[0][6]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: tmr_reg_reg[0][0]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  tmr_8bit           5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  tmr_reg_reg[0][6]/CK (DFFR_X1)           0.00       0.00 r
+  tmr_reg_reg[0][6]/Q (DFFR_X1)            0.65       0.65 f
+  U217/Z (XOR2_X1)                         0.30       0.95 f
+  U216/ZN (NOR4_X1)                        0.45       1.40 r
+  U210/ZN (NAND2_X1)                       0.17       1.56 f
+  U192/Z (MUX2_X1)                         0.41       1.97 f
+  U136/ZN (NAND2_X4)                       0.19       2.16 r
+  U190/ZN (NAND2_X1)                       0.24       2.40 f
+  U166/ZN (OAI221_X1)                      0.47       2.87 r
+  tmr_reg_reg[0][0]/D (DFFR_X1)            0.00       2.87 r
+  data arrival time                                   2.87
+
+  clock clk (rise edge)                    3.16       3.16
+  clock network delay (ideal)              0.00       3.16
+  tmr_reg_reg[0][0]/CK (DFFR_X1)           0.00       3.16 r
+  library setup time                      -0.27       2.89
+  data required time                                  2.89
+  -----------------------------------------------------------
+  data required time                                  2.89
+  data arrival time                                  -2.87
+  -----------------------------------------------------------
+  slack (MET)                                         0.02
+
+
+
+************************************************************************************************
+
+
+ 
+****************************************
+Report : area
+Design : soc_top
+Version: I-2013.12-SP1
+Date   : Mon Mar 30 22:53:33 2015
+****************************************
+
+Information: Updating design information... (UID-85)
+Information: Timing loop detected. (OPT-150)
+	timer/tmr_reg_reg[2][6]/clocked_on timer/tmr_reg_reg[2][6]/Q timer/I_30/A timer/I_30/Z timer/C317/A timer/C317/Z timer/B_3/A timer/B_3/Z timer/C465/CONTROL1_0 timer/C465/Z_0 
+Information: Timing loop detected. (OPT-150)
+	timer/tmr_reg_reg[2][5]/clocked_on timer/tmr_reg_reg[2][5]/Q timer/I_31/A timer/I_31/Z timer/C317/B timer/C317/Z timer/B_3/A timer/B_3/Z timer/C465/CONTROL1_0 timer/C465/Z_0 
+Warning: Disabling timing arc between pins 'A' and 'Z' on cell 'timer/C317'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Z' on cell 'timer/C317'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'A' and 'Z' on cell 'timer/C319'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Z' on cell 'timer/C319'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'A' and 'Z' on cell 'timer/C322'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Z' on cell 'timer/C322'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'A' and 'Z' on cell 'timer/C324'
+         to break a timing loop. (OPT-314)
+Warning: Disabling timing arc between pins 'B' and 'Z' on cell 'timer/C324'
+         to break a timing loop. (OPT-314)
+Library(s) Used:
+
+    gtech (File: /usr/local/apps/synopsys/syn/libraries/syn/gtech.db)
+
+Number of ports:                           29
+Number of nets:                            86
+Number of cells:                            4
+Number of combinational cells:              0
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       4
+
+Combinational area:                  0.000000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:             447.428645
+
+Total cell area:                     0.000000
+Total area:                        447.428645
+
+
+
+
