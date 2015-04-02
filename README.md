@@ -4,4 +4,4 @@
 !Authors: Amutha Bharathi M ,         Kiran AG
 !University of Minnesota - Twin Cities
 #Design Files and Schematics can be found here.
-![alt tag] (https://drive.google.com/a/umn.edu/file/d/0B06RFfIEojzocnlYUW1pTzRncUU)
+![CPU_SCHEMATIC] (https://drive.google.com/a/umn.edu/file/d/0B06RFfIEojzocnlYUW1pTzRncUU)
