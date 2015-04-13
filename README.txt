@@ -4,3 +4,4 @@ SoC Design with Programmable Controller/Router and Peripheral Design with periph
 Authors: Amutha Bharathi M ,         Kiran AG
 University of Minnesota - Twin Cities
 Design Files and Schematics can be found here.
+Copyright© 2015 Amutha Bharathi M.
