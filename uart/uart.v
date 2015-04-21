@@ -143,11 +143,14 @@ module uart_v1
 	
 	/**********************************************************************/
 	
-	always@(posedge(tx_en))
+	always@(posedge(tx_en) or negedge(tx_en))
 	begin
 		tx_data_buff[8:1]<= uart_reg[1]; // take the transmission data into buffer
 		tx_data_buff[0]<=0; //tx start bit is zero
-		tx_start <= 1'b1;
+		if(txc == 0)
+			tx_start <= 1'b1;
+		else if(txc == 1)
+			tx_start <= 1'b0;
 	
 	//	tx_buff_empty<=0; // Tx buffer is not empty now
 	end
@@ -175,7 +178,7 @@ module uart_v1
 				tx_count<=0;	  // Reset the transmittion bit count
 				tx<=1;			  // Pull the transmitter pin high
 				txc<=1;//uart_reg[0][3]<= 1;// TXC bit set high
-				tx_start <= 1'b0;
+				tx_en <= 0;
 			end
 		end
 		else if( tx_en == 0 && rst_n == 0 ) // if rst_n signal is on, rst_n all variables and pull tx pin high
@@ -184,7 +187,7 @@ module uart_v1
 			tx_count<=0;
 			tx<=1;
 			txc<=0;//uart_reg[0][3]<= 0;// TXC bit set low
-			tx_start <= 1'b0;
+			tx_en<=0;
 		end
 	
 	//end
