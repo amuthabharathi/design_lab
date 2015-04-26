@@ -23,7 +23,7 @@
 // 	10		  | 57600  32mhz/(2*57600) = 277.77
 // 	11		  | 115200 32mhz/(2*115200)= 138.88
 
-`include "defines.v"
+//`include "defines.v"
 
 module uart_v1
 (
@@ -69,13 +69,13 @@ module uart_v1
 	reg		baud_clk = 0;
 	reg 	[3:0]	tx_count = 0; //for data transmission
 	reg	[3:0]	rx_count = 0;
-	reg 		tx_buff_empty; // initial value will be 8'hxxxx 
+	reg 		tx_buff_empty= 0; // initial value will be 8'hxxxx 
 	reg		rx_buff_empty = 1; 
 	reg		rx_start = 0;
 	reg	[9:0]   baud;
 	reg  	[8:0]   tx_data_buff;
 	reg		tx_start;
-	
+	reg 		uart_rst_n=1;
 	assign tx_en   = uart_reg[0][7]; // 7th bit of ctl register
 	assign rx_en   = uart_reg[0][6]; // 6th bit of ctl register
 	
@@ -121,7 +121,7 @@ module uart_v1
 		begin
 			// && addr3[1:0] != 2'b10) // If write is enabled and not UARTRX read-only register is the target 
 			case(addr3[1:0])
-				2'b00: uart_reg[0] <= data_in ;
+				2'b00: uart_reg[0] <= data_in;
 				2'b01: uart_reg[1] <= data_in;
 				2'b10: ;
 				2'b11: uart_reg[3] <= data_in;
@@ -133,7 +133,7 @@ module uart_v1
 			uart_reg[0] <= uart_reg[0] | (txc<<3) | (rxc<<2) ;
 		end
 		
-		else if(rst_n == 0)
+		else if(rst_n == 0 || uart_rst_n == 0)
 		begin
 			uart_reg[0] <= 8'h00;//UARTCON
 			uart_reg[1] <= 8'h00;//UARTTX
@@ -143,10 +143,11 @@ module uart_v1
 	
 	/**********************************************************************/
 	
-	always@(posedge(tx_en) or negedge(tx_en))
+	always@(posedge(tx_en))
 	begin
 		tx_data_buff[8:1]<= uart_reg[1]; // take the transmission data into buffer
 		tx_data_buff[0]<=0; //tx start bit is zero
+		
 		if(txc == 0)
 			tx_start <= 1'b1;
 		else if(txc == 1)
@@ -161,6 +162,7 @@ module uart_v1
 	end
 	
 	// transmitter module 
+	
 	always@(posedge(baud_clk))
 	begin
 		if( tx_en == 1 && tx_start == 1'b1 && tx_buff_empty == 0 && rst_n == 1 ) 
@@ -178,7 +180,7 @@ module uart_v1
 				tx_count<=0;	  // Reset the transmittion bit count
 				tx<=1;			  // Pull the transmitter pin high
 				txc<=1;//uart_reg[0][3]<= 1;// TXC bit set high
-				tx_en <= 0;
+				uart_rst_n <= 0;
 			end
 		end
 		else if( tx_en == 0 && rst_n == 0 ) // if rst_n signal is on, rst_n all variables and pull tx pin high
@@ -187,7 +189,7 @@ module uart_v1
 			tx_count<=0;
 			tx<=1;
 			txc<=0;//uart_reg[0][3]<= 0;// TXC bit set low
-			tx_en<=0;
+			uart_rst_n<=0;
 		end
 	
 	//end
@@ -229,4 +231,3 @@ module uart_v1
 	end
 
 endmodule
-
