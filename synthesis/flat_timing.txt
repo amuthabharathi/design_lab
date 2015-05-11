@@ -1,0 +1,53 @@
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : soc_top_1
+Version: I-2013.12-SP1
+Date   : Sun May 10 21:30:13 2015
+****************************************
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: timer/tmr_reg_reg[0][7]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: timer/tmr_reg_reg[0][3]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  soc_top_1          5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  timer/tmr_reg_reg[0][7]/CK (DFFR_X1)                    0.00       0.00 r
+  timer/tmr_reg_reg[0][7]/Q (DFFR_X1)                     0.65       0.65 f
+  timer/U52/Z (XOR2_X2)                                   0.32       0.97 f
+  timer/U3/ZN (NOR4_X2)                                   0.36       1.33 r
+  timer/U50/ZN (NAND2_X2)                                 0.12       1.45 f
+  timer/U5/ZN (NAND3_X1)                                  0.29       1.74 r
+  timer/U76/ZN (OAI211_X2)                                0.28       2.02 f
+  timer/U47/ZN (NAND2_X2)                                 0.41       2.43 r
+  timer/U20/ZN (OR2_X1)                                   0.25       2.69 r
+  timer/U22/ZN (NAND3_X2)                                 0.07       2.75 f
+  timer/tmr_reg_reg[0][3]/D (DFFR_X2)                     0.00       2.75 f
+  data arrival time                                                  2.75
+
+  clock CLK (rise edge)                                   3.12       3.12
+  clock network delay (ideal)                             0.00       3.12
+  timer/tmr_reg_reg[0][3]/CK (DFFR_X2)                    0.00       3.12 r
+  library setup time                                     -0.29       2.83
+  data required time                                                 2.83
+  --------------------------------------------------------------------------
+  data required time                                                 2.83
+  data arrival time                                                 -2.75
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.08
+
