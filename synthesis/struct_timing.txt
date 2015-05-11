@@ -1,1 +1,52 @@
 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : soc_top_1
+Version: I-2013.12-SP1
+Date   : Sun May 10 21:25:26 2015
+****************************************
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: timer/tmr_reg_reg[0][7]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: timer/tmr_reg_reg[0][0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  soc_top_1          5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  timer/tmr_reg_reg[0][7]/CK (DFFR_X1)                    0.00       0.00 r
+  timer/tmr_reg_reg[0][7]/Q (DFFR_X1)                     0.65       0.65 f
+  timer/U57/Z (XOR2_X2)                                   0.32       0.97 f
+  timer/U3/ZN (NOR4_X2)                                   0.36       1.33 r
+  timer/U50/ZN (NAND2_X2)                                 0.12       1.46 f
+  timer/U78/ZN (OAI211_X2)                                0.68       2.14 r
+  timer/U47/ZN (NAND2_X2)                                 0.33       2.47 f
+  timer/U45/ZN (OAI221_X2)                                0.37       2.84 r
+  timer/tmr_reg_reg[0][0]/D (DFFR_X1)                     0.00       2.84 r
+  data arrival time                                                  2.84
+
+  clock CLK (rise edge)                                   3.12       3.12
+  clock network delay (ideal)                             0.00       3.12
+  timer/tmr_reg_reg[0][0]/CK (DFFR_X1)                    0.00       3.12 r
+  library setup time                                     -0.23       2.89
+  data required time                                                 2.89
+  --------------------------------------------------------------------------
+  data required time                                                 2.89
+  data arrival time                                                 -2.84
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.05
+
